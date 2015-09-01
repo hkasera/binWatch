@@ -44,6 +44,11 @@ var BinWatch = function() {
 
         //  Local cache for static content.
         self.zcache['index.html'] = fs.readFileSync('./index.html');
+
+        self.zcache['dump.json'] = fs.readFileSync('./public/dump.json','utf8');
+
+        
+        
     };
 
 
@@ -103,6 +108,11 @@ var BinWatch = function() {
         self.routes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
+        };
+
+        self.routes['/bins'] = function(req, res) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(self.cache_get('dump.json') );
         };
     };
 

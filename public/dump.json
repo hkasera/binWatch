@@ -1,0 +1,72 @@
+[
+  {
+    "_id": "55e5e26c3523045d3a387fda",
+    "isActive": false,
+    "temperature": 26.2627,
+    "humidity": 14,
+    "binColor": "green",
+    "latitude": -66.751149,
+    "longitude": 114.595133,
+    "date": 1333065600000
+  },
+  {
+    "_id": "55e5e26c3dc3edcf54283569",
+    "isActive": false,
+    "temperature": 28.9385,
+    "humidity": 44,
+    "binColor": "yellow",
+    "latitude": -13.241555,
+    "longitude": -34.684298,
+    "date": 1333065600000
+  },
+  {
+    "_id": "55e5e26cc82b214c605e79bd",
+    "isActive": true,
+    "temperature": 89.3478,
+    "humidity": 47,
+    "binColor": "green",
+    "latitude": 88.99832,
+    "longitude": 125.094344,
+    "date": 1333065600000
+  },
+  {
+    "_id": "55e5e26c35d45c5a3d81bed8",
+    "isActive": true,
+    "temperature": 63.5096,
+    "humidity": 93,
+    "binColor": "yellow",
+    "latitude": 8.708278,
+    "longitude": -129.590232,
+    "date": 1333065600000
+  },
+  {
+    "_id": "55e5e26c9014bdd8b07e7d9c",
+    "isActive": false,
+    "temperature": 54.2524,
+    "humidity": 62,
+    "binColor": "yellow",
+    "latitude": -81.012727,
+    "longitude": -96.781665,
+    "date": 1333065600000
+  },
+  {
+    "_id": "55e5e26cba6c3cbb0ccd9a09",
+    "isActive": true,
+    "temperature": 61.7448,
+    "humidity": 58,
+    "binColor": "yellow",
+    "latitude": -26.635051,
+    "longitude": 176.835304,
+    "date": 1333065600000
+  },
+  {
+    "_id": "55e5e26c579239d8620b3b25",
+    "isActive": true,
+    "temperature": 85.8747,
+    "humidity": 35,
+    "binColor": "yellow",
+    "latitude": -78.975063,
+    "longitude": -45.392181,
+    "date": 1333065600000
+  }
+]
