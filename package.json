@@ -1,7 +1,7 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "BinWatch",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "description": "BinWatch",
   "keywords": [
     "OpenShift",
     "Node.js",
@@ -9,8 +9,8 @@
     "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
+    "name": "Harshita",
+    "email": "hkasera5@gmail.com",
     "url": "http://www.openshift.com/"
   },
   "homepage": "http://www.openshift.com/",

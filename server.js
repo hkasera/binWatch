@@ -2,12 +2,12 @@
 //  OpenShift sample Node application
 var express = require('express');
 var fs      = require('fs');
-
+var path    =  require('path');
 
 /**
  *  Define the sample application.
  */
-var SampleApp = function() {
+var BinWatch = function() {
 
     //  Scope.
     var self = this;
@@ -140,6 +140,7 @@ var SampleApp = function() {
      */
     self.start = function() {
         //  Start the app on the specific interface (and port).
+        self.app.use(express.static(path.join(__dirname, 'public')));
         self.app.listen(self.port, self.ipaddress, function() {
             console.log('%s: Node server started on %s:%d ...',
                         Date(Date.now() ), self.ipaddress, self.port);
@@ -153,7 +154,7 @@ var SampleApp = function() {
 /**
  *  main():  Main code.
  */
-var zapp = new SampleApp();
+var zapp = new BinWatch();
 zapp.initialize();
 zapp.start();
 
