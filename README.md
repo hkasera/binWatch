@@ -1,3 +1,8 @@
-The OpenShift `nodejs` cartridge documentation can be found at:
+# binWatch
 
-http://openshift.github.io/documentation/oo_cartridge_guide.html#nodejs
+URL : http://binwatch-ghci.rhcloud.com/
+
+
+## API Documentation
+
+https://github.com/hkasera/binWatch/wiki/API-reference
