@@ -13,7 +13,8 @@ function locateBins(bins){
        console.log(bins[i].latitude)
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(bins[i].latitude, bins[i].longitude),
-        map: map
+        map: map,
+        icon: '/img/trash.png'
       });
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
