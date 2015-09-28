@@ -3,7 +3,7 @@
 var express = require('express');
 var fs      = require('fs');
 var path    =  require('path');
-
+var ejs = require('ejs');
 /**
  *  Define the sample application.
  */
@@ -110,6 +110,11 @@ var BinWatch = function() {
             res.send(self.cache_get('index.html') );
         };
 
+        self.routes['/locate'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.render('locate.html',{API_KEY: process.env.GMAPP_BROWSER_KEY});
+        };
+
         self.routes['/bins'] = function(req, res) {
             res.setHeader('Content-Type', 'application/json');
             res.send(self.cache_get('dump.json') );
@@ -123,12 +128,13 @@ var BinWatch = function() {
      */
     self.initializeServer = function() {
         self.createRoutes();
-        self.app = express.createServer();
+        self.app = express();
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
         }
+        require('./app/routes/apiroutes')(self);
     };
 
 
@@ -150,6 +156,7 @@ var BinWatch = function() {
      */
     self.start = function() {
         //  Start the app on the specific interface (and port).
+        self.app.engine('html', ejs.renderFile);
         self.app.use(express.static(path.join(__dirname, 'public')));
         self.app.listen(self.port, self.ipaddress, function() {
             console.log('%s: Node server started on %s:%d ...',
