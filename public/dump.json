@@ -4,7 +4,7 @@
     "isActive": false,
     "temperature": 26.2627,
     "humidity": 14,
-    "binColor": "green",
+    "fill": "70",
     "latitude": 12.927991, 
     "longitude": 77.603817,
     "date": 1333065600000
@@ -14,7 +14,7 @@
     "isActive": false,
     "temperature": 28.9385,
     "humidity": 44,
-    "binColor": "yellow",
+    "fill": "30",
     "latitude": 12.927761, 
     "longitude": 77.607668,
     "date": 1333065600000
@@ -24,7 +24,7 @@
     "isActive": true,
     "temperature": 89.3478,
     "humidity": 47,
-    "binColor": "green",
+    "fill": "20",
     "latitude": 12.925460, 
     "longitude": 77.607604,
     "date": 1333065600000
@@ -34,7 +34,7 @@
     "isActive": true,
     "temperature": 63.5096,
     "humidity": 93,
-    "binColor": "yellow",
+    "fill": "90",
     "latitude": 12.924780, 
     "longitude":77.601703,
     "date": 1333065600000
@@ -44,7 +44,7 @@
     "isActive": false,
     "temperature": 54.2524,
     "humidity": 62,
-    "binColor": "yellow",
+    "fill": "10",
     "latitude": 12.926464, 
     "longitude": 77.600823,
     "date": 1333065600000
@@ -54,7 +54,7 @@
     "isActive": true,
     "temperature": 61.7448,
     "humidity": 58,
-    "binColor": "yellow",
+    "fill": "50",
     "latitude":12.928702, 
     "longitude": 77.605448,
     "date": 1333065600000
@@ -64,7 +64,7 @@
     "isActive": true,
     "temperature": 85.8747,
     "humidity": 35,
-    "binColor": "yellow",
+    "fill": "40",
     "latitude": 12.927803, 
     "longitude": 77.609117,
     "date": 1333065600000

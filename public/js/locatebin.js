@@ -10,15 +10,17 @@ function locateBins(bins){
     
     infowindow = new google.maps.InfoWindow();
     for (i = 0; i < bins.length; i++) {
-       console.log(bins[i].latitude)
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(bins[i].latitude, bins[i].longitude),
-        map: map,
-        icon: '/img/trash.png'
+       
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(bins[i].latitude, bins[i].longitude),
+          map: map,
+          icon: '/img/trash.png'
       });
+      
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
-          infowindow.setContent("Bin "+(i+1));
+          var contentString = "<div><a href='/bin/"+bins[i]._id+"'>Bin "+(i+1)+"</a></div>";
+          infowindow.setContent(contentString);
           infowindow.open(map, marker);
         }
       })(marker, i));

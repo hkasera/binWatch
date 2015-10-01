@@ -127,6 +127,11 @@ var BinWatch = function() {
             res.send(self.cache_get('dump.json') );
         };
 
+        self.routes['/bin/:id'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.render('bin.html');
+        };
+
         self.routes['/bins/:from/:to'] = function(req, res) {
             res.setHeader('Content-Type', 'application/json');
             res.send(self.cache_get('dump.json') );
