@@ -2,6 +2,8 @@
   {
     "_id": "55e5e26c3523045d3a387fda",
     "isActive": false,
+    "name":"1/0, Bismillahnagar, Sadduguntepalya, Bengaluru, Karnataka 560029, India",
+    "type":"dry",
     "temperature": 26.2627,
     "humidity": 14,
     "fill": "70",
@@ -11,7 +13,9 @@
   },
   {
     "_id": "55e5e26c3dc3edcf54283569",
+    "name":"125-126, 3rd Main Rd, Krishna Murthi Layout, Sadduguntepalya, Bengaluru, Karnataka 560029, India",
     "isActive": false,
+    "type":"dry",
     "temperature": 28.9385,
     "humidity": 44,
     "fill": "30",
@@ -22,6 +26,8 @@
   {
     "_id": "55e5e26cc82b214c605e79bd",
     "isActive": true,
+    "name":"7th Cross Rd, Balaji Nagar, Sadduguntepalya, Bengaluru, Karnataka 560029, India",
+    "type":"dry",
     "temperature": 89.3478,
     "humidity": 47,
     "fill": "20",
@@ -32,6 +38,8 @@
   {
     "_id": "55e5e26c35d45c5a3d81bed8",
     "isActive": true,
+    "name":"21, Bannerghatta Rd, OLd Gurappanapalya, Stage 1, BTM Layout, Bengaluru, Karnataka 560029, India",
+    "type":"wet",
     "temperature": 63.5096,
     "humidity": 93,
     "fill": "90",
@@ -42,6 +50,8 @@
   {
     "_id": "55e5e26c9014bdd8b07e7d9c",
     "isActive": false,
+    "name":"Tank Bund Rd, Bismillahnagar, Sadduguntepalya, Bengaluru, Karnataka 560029, India",
+    "type":"wet",
     "temperature": 54.2524,
     "humidity": 62,
     "fill": "10",
@@ -52,6 +62,8 @@
   {
     "_id": "55e5e26cba6c3cbb0ccd9a09",
     "isActive": true,
+    "name":"11, Tank Bund Rd, Tavarekere, Sadduguntepalya, Bengaluru, Karnataka 560029, India",
+    "type":"wet",
     "temperature": 61.7448,
     "humidity": 58,
     "fill": "50",
@@ -62,6 +74,8 @@
   {
     "_id": "55e5e26c579239d8620b3b25",
     "isActive": true,
+    "name":"12, 3rd Main Rd, Krishna Murthi Layout, Sadduguntepalya, Bengaluru, Karnataka 560029, India",
+    "type":"wet",
     "temperature": 85.8747,
     "humidity": 35,
     "fill": "40",

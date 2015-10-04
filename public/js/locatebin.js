@@ -19,7 +19,7 @@ function locateBins(bins){
       
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
-          var contentString = "<div><a href='/bin/"+bins[i]._id+"'>Bin "+(i+1)+"</a></div>";
+          var contentString = "<div><a href='/bin/"+bins[i]._id+"'>"+bins[i].name+"</a></div>";
           infowindow.setContent(contentString);
           infowindow.open(map, marker);
         }
