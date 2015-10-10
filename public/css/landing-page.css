@@ -206,3 +206,9 @@ p.copyright {
     font-size: 60px;
     line-height: 1;
 }
+
+.get-direction{
+    position: absolute;
+    top: 100px;
+    right: 30px;
+}
