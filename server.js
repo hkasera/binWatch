@@ -45,6 +45,8 @@ var BinWatch = function() {
         //  Local cache for static content.
         self.zcache['index.html'] = fs.readFileSync('./index.html');
 
+        self.zcache['contact.html'] = fs.readFileSync('./contact.html');
+
         self.zcache['trends.html'] = fs.readFileSync('./views/trends.html');
 
         self.zcache['dump.json'] = fs.readFileSync('./public/dump.json','utf8');
@@ -115,6 +117,11 @@ var BinWatch = function() {
         self.routes['/locate'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.render('locate.html',{API_KEY: process.env.GMAPP_BROWSER_KEY});
+        };
+
+        self.routes['/contact'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(self.cache_get('contact.html') );
         };
 
         self.routes['/trends'] = function(req, res) {
