@@ -12,7 +12,9 @@ module.exports = {
     			"longitude":true,
           "humidity":true,
           "temperature":true,
-          "fill":true
+          "fill":true,
+          "name":true,
+          "type":true
     		},function(err, docs) {
           if(!err){
             res.send(docs);  
@@ -31,7 +33,9 @@ module.exports = {
           "longitude":true,
           "humidity":true,
           "temperature":true,
-          "fill":true
+          "fill":true,
+          "name":true,
+          "type":true
         },function(err, docs) {
           if(!err){
             res.send(docs);  
