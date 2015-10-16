@@ -14,7 +14,8 @@ module.exports = {
           "temperature":true,
           "fill":true,
           "name":true,
-          "type":true
+          "type":true,
+          "address":true
     		},function(err, docs) {
           if(!err){
             res.send(docs);  
@@ -35,7 +36,8 @@ module.exports = {
           "temperature":true,
           "fill":true,
           "name":true,
-          "type":true
+          "type":true,
+          "address":true
         },function(err, docs) {
           if(!err){
             res.send(docs);  
