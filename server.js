@@ -4,8 +4,9 @@ var express = require('express');
 var fs      = require('fs');
 var path    =  require('path');
 var ejs = require('ejs');
+var bodyParser = require('body-parser');
 /**
- *  Define the sample application.
+ *  Define the BinWatch application.
  */
 var BinWatch = function() {
 
@@ -153,7 +154,9 @@ var BinWatch = function() {
     self.initializeServer = function() {
         self.createRoutes();
         self.app = express();
-
+        
+        self.app.use(bodyParser.json()); // support json encoded bodies
+        self.app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
@@ -182,6 +185,7 @@ var BinWatch = function() {
         //  Start the app on the specific interface (and port).
         self.app.engine('html', ejs.renderFile);
         self.app.use(express.static(path.join(__dirname, 'public')));
+        
         self.app.listen(self.port, self.ipaddress, function() {
             console.log('%s: Node server started on %s:%d ...',
                         Date(Date.now() ), self.ipaddress, self.port);

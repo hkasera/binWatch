@@ -18,5 +18,9 @@ module.exports = function(self){
         BinsActivity.getBinLatestActivity(req,res);
     });
 
+    self.app.post('/get/bin/:id/activity' , function(req, res) {
+        BinsActivity.getBinActivityForRange(req,res);
+    });
+
  
 }
