@@ -16,7 +16,8 @@ module.exports = {
 	    });   
 	},
   getBinActivityForRange:function(req,res){
-    var binActivity = db.collection('binActivity'); 
+    var binActivity = db.collection('binActivity');
+
       db.binActivity.find(
         {
           "binId": ObjectId(req.params.id),
@@ -27,6 +28,9 @@ module.exports = {
         },
         function(err, docs) {
           if(!err){
+            if(req.body.attr){
+              res.send(docs.map(function(a) {return a[req.body.attr];}));
+            } 
             res.send(docs);  
           }else{
             res.send({});
