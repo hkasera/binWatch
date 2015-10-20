@@ -19,6 +19,8 @@ function init(){
     navigator.geolocation.getCurrentPosition(function(position) {
       initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
       map.setCenter(initialLocation);
+      var url = "/get/bins/" + parseInt(position.coords.latitude,10) + "/" + parseInt(position.coords.longitude,10);
+      $.when( $.ajax( url ) ).then(locateBins,handleError);
     }, function() {
       handleNoGeolocation(browserSupportFlag);
     });
@@ -28,6 +30,7 @@ function init(){
     browserSupportFlag = false;
     handleNoGeolocation(browserSupportFlag);
   }
+  initAutocomplete();
 }
 
 function initAutocomplete() {
@@ -90,13 +93,13 @@ function initAutocomplete() {
 
 
 function handleNoGeolocation(errorFlag) {
+    
+    $.when( $.ajax( "/get/bins/12/77" ) ).then(locateBins,handleError);
     map.setCenter(initialLocation);
 }
 
 
 function locateBins(bins){
-  init();
-  initAutocomplete();
   binsPlaced = bins;
   var infowindow, marker, i;
 
@@ -151,7 +154,6 @@ function getDirections(){
     for(i=0;i<=bins.length-1;++i){
       url = url + "/" +getPosition(bins[i].latitude,bins[i].longitude);
     }
-    console.log(url);
     
     var request = {
       origin:start, 
@@ -180,4 +182,6 @@ function handleError(){
   console.log("Ooops error");
 }
 
-$.when( $.ajax( "/get/bins/12/77" ) ).then(locateBins,handleError);
+init();
+
+
