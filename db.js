@@ -14,6 +14,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 
 var db = mongojs(connection_string, ['bins','binActivity']);
 
+db.bins.ensureIndex({loc: "2d"});
 
 module.exports = db;
 

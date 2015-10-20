@@ -180,4 +180,4 @@ function handleError(){
   console.log("Ooops error");
 }
 
-$.when( $.ajax( "/get/bins" ) ).then(locateBins,handleError);
+$.when( $.ajax( "/get/bins/12/77" ) ).then(locateBins,handleError);

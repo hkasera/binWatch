@@ -6,6 +6,10 @@ module.exports = function(self){
         Bins.getAllBins(req,res);
     });
 
+    self.app.get('/get/bins/:lati/:longi' , function(req, res) {
+        Bins.getBinInLocation(req,res);
+    });
+
     self.app.get('/get/bin/:id' , function(req, res) {
         Bins.getBinDetails(req,res);
     });
