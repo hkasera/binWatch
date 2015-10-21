@@ -23,13 +23,13 @@ module.exports = {
 
         });
     },
-    
+
     getBinInLocation: function(req, res) {
         var bins = db.collection('bins'),
             lati = parseFloat(req.params.lati),
             longi = parseFloat(req.params.longi),
             maxDistance = 2000;
-
+        
         if (req.params.radius) {
             maxDistance = parseInt(req.params.radius, 10);
         }
