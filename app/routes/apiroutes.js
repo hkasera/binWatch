@@ -10,6 +10,10 @@ module.exports = function(self){
         Bins.getBinInLocation(req,res);
     });
 
+    self.app.get('/get/bins/:lati/:longi/:radius' , function(req, res) {
+        Bins.getBinInLocation(req,res);
+    });
+
     self.app.get('/get/bin/:id' , function(req, res) {
         Bins.getBinDetails(req,res);
     });

@@ -19,7 +19,7 @@ function init(){
     navigator.geolocation.getCurrentPosition(function(position) {
       initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
       map.setCenter(initialLocation);
-      var url = "/get/bins/" + parseInt(position.coords.latitude,10) + "/" + parseInt(position.coords.longitude,10);
+      var url = "/get/bins/" + parseFloat(position.coords.latitude,10) + "/" + parseFloat(position.coords.longitude,10);
       $.when( $.ajax( url ) ).then(locateBins,handleError);
     }, function() {
       handleNoGeolocation(browserSupportFlag);

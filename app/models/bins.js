@@ -3,7 +3,7 @@ var mongojs = require('mongojs');
 var ObjectId = mongojs.ObjectId; 
 module.exports = {
 	getAllBins: function(req, res){  
-		var bins = db.collection('bins'); 
+		var bins = db.collection('bins');
    		db.bins.find(
    			{},
    			{
@@ -27,9 +27,24 @@ module.exports = {
 	},
   getBinInLocation:function(req,res){
     var bins = db.collection('bins'), 
-        lati = parseInt(req.params.lati),
-        longi = parseInt(req.params.longi);
-    bins.find({loc: {$near: [lati,longi], $maxDistance: 10}}).toArray(function(err, docs) {
+        lati = parseFloat(req.params.lati),
+        longi = parseFloat(req.params.longi),
+        maxDistance = 2000;
+
+    if(req.params.radius){
+      maxDistance = parseInt(req.params.radius,10);
+    }
+    bins.find(
+      {
+        loc : {
+      $near : {
+        $geometry : { 
+          type : "Point" , 
+          coordinates : [longi,lati]  
+        }, 
+        $maxDistance : maxDistance
+      }
+    }}).toArray(function(err, docs) {
       if(err) return console.dir(err)
 
       res.send(docs);  
