@@ -23,6 +23,7 @@ module.exports = {
 
         });
     },
+    
     getBinInLocation: function(req, res) {
         var bins = db.collection('bins'),
             lati = parseFloat(req.params.lati),
