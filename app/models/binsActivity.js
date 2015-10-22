@@ -80,7 +80,7 @@ module.exports = {
         });
 
     },
-    binPredictionCalc:function(sanitized_params){      
+    binPredictionCalc:function(req,res,sanitized_params){      
       db.binActivity.find({
         }).sort({
             timestamp: -1
@@ -89,9 +89,11 @@ module.exports = {
                 if (!err) {
                     if(docs.length != 0){
                         predictTime(docs,sanitized_params.id);
+                        res.send({});
                     }
                 } else {
                     console.log(err);
+                    res.send({});
                 }
 
         });
