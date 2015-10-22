@@ -268,9 +268,13 @@ module.exports = function(self){
     });
 
     self.app.post('/bin/predict/:id' , function(req, res) {
-        console.log(req.body.key);
-        if(req.body.key && req.body.key === process.env.GMAPP_BROWSER_KEY){
-            BinsActivity.binPredictionCalc(req,res,{});
+         /* XSS Validation */
+        var oid = Utils.validateXSS(req.params.id);
+        var params = {};
+
+        if(Utils.checkForHexRegExp(oid) && req.body.key && req.body.key === process.env.GMAPP_BROWSER_KEY){
+            params.id = oid;
+            BinsActivity.binPredictionCalc(req,res,params);
         }else{
             res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }
