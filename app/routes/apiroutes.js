@@ -38,7 +38,7 @@ module.exports = function(self){
     self.app.get('/get/bin/:id' , function(req, res) {
         Bins.getBinDetails(req,res);
     });
-    
+
 
     /** Bin activity API **/
 
@@ -58,9 +58,9 @@ module.exports = function(self){
         BinsActivity.getBinActivityForRange(req,res);
     });
 
-    self.app.post('/add/bin/:id/activity' , function(req, res) {
+    /*self.app.post('/add/bin/:id/activity' , function(req, res) {
         BinsActivity.insertBinActivityForBin(req,res);
-    });
+    });*/
 
  
 }
