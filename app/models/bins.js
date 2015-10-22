@@ -19,8 +19,8 @@ var pageNumber = 1;
 
 module.exports = {
     getAllBins: function(req, res) {
-
-        if (req.params.page && !isNaN(req.params.page)) {
+        if (req.params.page) {
+            pageNumber = Utils.invalidInput(req.params.page);
             pageNumber = parseInt(req.params.page, 10);
         }
         if (req.params.limit && !isNaN(req.params.limit)) {
