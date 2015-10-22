@@ -120,7 +120,6 @@ module.exports = function(self){
         }else{
             params.lati = lati;
             params.longi = longi;
-            params.page = page;
             params.radius = radius;
             Bins.getBinInLocation(req,res,params);
         }
