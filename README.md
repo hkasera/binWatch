@@ -13,6 +13,17 @@ URL : http://binwatch-ghci.rhcloud.com/
 
          node server.js
          
+         
+## NPM Packages
+       
+  **express**  
+        
+  **ejs**
+        
+  **body-parser**
+        
+  **xss-filters**
+        
 
 ## API Documentation
 
