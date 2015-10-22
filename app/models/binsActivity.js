@@ -82,6 +82,7 @@ module.exports = {
     },
     binPredictionCalc:function(req,res,sanitized_params){      
       db.binActivity.find({
+            "binId": ObjectId(sanitized_params.id),
         }).sort({
             timestamp: -1
         }).limit(defaultPageSize,
@@ -93,7 +94,7 @@ module.exports = {
                     }
                 } else {
                     console.log(err);
-                    res.send({});
+                    res.send(err);
                 }
 
         });

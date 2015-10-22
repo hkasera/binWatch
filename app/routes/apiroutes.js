@@ -267,7 +267,7 @@ module.exports = function(self){
         }
     });
 
-    self.app.post('/bin/predict' , function(req, res) {
+    self.app.post('/bin/predict/:id' , function(req, res) {
         console.log(req.body.key);
         if(req.body.key && req.body.key === process.env.GMAPP_BROWSER_KEY){
             BinsActivity.binPredictionCalc(req,res,{});
