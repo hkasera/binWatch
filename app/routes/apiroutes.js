@@ -38,6 +38,7 @@ module.exports = function(self){
     self.app.get('/get/bin/:id' , function(req, res) {
         Bins.getBinDetails(req,res);
     });
+    
 
     /** Bin activity API **/
 
