@@ -80,25 +80,55 @@ module.exports = {
         });
 
     },
-    binPredictionCalc:function(sanitized_params){
-      
+    binPredictionCalc:function(sanitized_params){      
       db.binActivity.find({
-            "binId": ObjectId(sanitized_params.id)
         }).sort({
             timestamp: -1
         }).limit(defaultPageSize,
             function(err, docs) {
                 if (!err) {
-                    
+                    if(docs.length != 0){
+                        predictTime(docs,sanitized_params.id);
+                    }
                 } else {
-                    
+                    console.log(err);
                 }
 
         });
     }
 }
 
-function predictTime(bins){
+function predictTime(bins,binId){
   var rate = 0,
       sum_weight = 0;
+    for(var counter in bins){
+        var bin = bins[counter];
+        var fill = bin.fill;
+        var timestamp = bin.timestamp;
+        if(counter != 0 && (bins[counter].fill > bins[counter-1].fill)){
+          rate += counter*(bins[counter].fill - bins[counter-1].fill)/ (bins[counter].timestamp - bins[counter-1].timestamp);
+          sum_weight += counter;
+        }
+    }
+  rate = rate/ sum_weight;
+  var time = (100 - bins[counter-1].fill)/rate;
+  var predictTime = (bins[counter-1].timestamp + time);
+
+  db.binPrediction.update(
+   {"binId": ObjectId(binId)},
+   {
+        $set: {
+            "nextFill": predictTime
+        },
+        $setOnInsert: {
+            "binId": ObjectId(binId)
+        }
+   },
+   {
+     upsert: true
+   },function(err,docs){
+    console.log(err,docs);
+   }
+  );
+
 }

@@ -12,7 +12,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
     connection_string = '127.0.0.1:27017/' + dbName;
 }
 
-var db = mongojs(connection_string, ['bins','binActivity']);
+var db = mongojs(connection_string, ['bins','binActivity','binPrediction']);
 
 db.bins.ensureIndex({loc: "2dsphere"});
 
