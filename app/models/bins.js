@@ -1,5 +1,7 @@
 var db = require("../../db.js");
 var mongojs = require('mongojs');
+var Utils = require("../common/utils.js");
+
 var ObjectId = mongojs.ObjectId;
 var binSchema = {
     "isActive": true,
@@ -12,19 +14,17 @@ var binSchema = {
     "type": true,
     "address": true
 };
-var Utils = require("../common/utils.js");
 var bins = db.collection('bins');
 var defaultPageSize = Utils.getDefaultPageSize();
 var pageNumber = 1;
 
 module.exports = {
-    getAllBins: function(req, res) {
-        if (req.params.page) {
-            pageNumber = Utils.invalidInput(req.params.page);
-            pageNumber = parseInt(req.params.page, 10);
+    getAllBins: function(req, res, sanitized_params) {
+        if (sanitized_params && sanitized_params.page) {
+            pageNumber = sanitized_params.page;
         }
-        if (req.params.limit && !isNaN(req.params.limit)) {
-            defaultPageSize = (defaultPageSize > req.params.limit) ? parseInt(req.params.limit, 10) : defaultPageSize;
+        if (sanitized_params && sanitized_params.limit) {
+            defaultPageSize = (defaultPageSize > sanitized_params.limit) ? parseInt(sanitized_params.limit, 10) : defaultPageSize;
         }
         db.bins.find({}, binSchema).sort({
             timestamp: -1
@@ -38,19 +38,27 @@ module.exports = {
         });
     },
 
-    getBinInLocation: function(req, res) {
-        var lati = parseFloat(req.params.lati),
-            longi = parseFloat(req.params.longi),
+    getBinInLocation: function(req, res,sanitized_params) {
+        var lati = sanitized_params.lati,
+            longi = sanitized_params.longi,
             maxDistance = 2000;
 
-        if (req.params.radius) {
-            maxDistance = parseInt(req.params.radius, 10);
+        if (sanitized_params.page) {
+            pageNumber = sanitized_params.page;
         }
-        if (req.params.page && !isNaN(req.params.page)) {
-            pageNumber = parseInt(req.params.page, 10);
+        if (sanitized_params.limit) {
+            var limit = sanitized_params.limit;
+            defaultPageSize = (defaultPageSize > limit) ? parseInt(limit, 10) : defaultPageSize;
         }
-        if (req.params.limit && !isNaN(req.params.limit)) {
-            defaultPageSize = (defaultPageSize > req.params.limit) ? parseInt(req.params.limit, 10) : defaultPageSize;
+
+        if (sanitized_params.radius) {
+            maxDistance = sanitized_params.radius;
+        }
+        if (sanitized_params.page) {
+            pageNumber = sanitized_params.page;
+        }
+        if (sanitized_params.limit) {
+            defaultPageSize = (defaultPageSize > sanitized_params.limit) ? parseInt(sanitized_params.limit, 10) : defaultPageSize;
         }
         bins.find({
             loc: {
@@ -68,9 +76,9 @@ module.exports = {
             res.send(docs);
         });
     },
-    getBinDetails: function(req, res) {
+    getBinDetails: function(req, res,sanitized_params) {
         db.bins.find({
-            "_id": ObjectId(req.params.id)
+            "_id": ObjectId(sanitized_params.id)
         }, binSchema, function(err, docs) {
             if (!err) {
                 res.send(docs);

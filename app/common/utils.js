@@ -25,7 +25,12 @@ module.exports = {
     checkForHexRegExp: function(id) {
     	return (new RegExp("^[0-9a-fA-F]{24}$")).test(id);
     },
+    isValidDateFormat: function(dateString){
+    	var re = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/;
+    	return re.exec(dateString);
+    },
     HTTP_STATUS_CODE:{
     	"BAD_REQUEST" : 400
-    }
+    },
+    validBinAttrs:["humidity","fill","temperature"]
 }
