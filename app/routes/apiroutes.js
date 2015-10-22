@@ -1,5 +1,6 @@
 var Bins = require("../models/bins.js");
 var BinsActivity = require("../models/binsActivity.js");
+var BinsPrediction = require("../models/binPrediction.js");
 var Utils = require("../common/utils.js");
 
 module.exports = function(self){
@@ -185,6 +186,21 @@ module.exports = function(self){
         }else{
             params.id = oid;
             Bins.getBinDetails(req,res,params);            
+        }
+    });
+
+    self.app.get('/get/bin/:id/prediction' , function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+
+        /* XSS Validation */
+        var oid = Utils.validateXSS(req.params.id);
+        var params = {};
+
+        if(!Utils.checkForHexRegExp(oid)){
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
+        }else{
+            params.id = oid;
+            BinsPrediction.getBinPrediction(req,res,params);            
         }
     });
 
