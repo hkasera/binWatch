@@ -18,7 +18,7 @@ module.exports = function(self){
         var pageNum = parseInt(Utils.validateXSS(req.params.page),10);
 
         if(isNaN(pageNum)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             Bins.getAllBins(req,res);
         }
@@ -32,7 +32,7 @@ module.exports = function(self){
             limit = parseInt(Utils.validateXSS(req.params.limit),10);
 
         if(isNaN(pageNum) || isNaN(limit)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             Bins.getAllBins(req,res);
         }
@@ -46,7 +46,7 @@ module.exports = function(self){
             longi = parseFloat(Utils.validateXSS(req.params.longi),10);
 
         if(isNaN(lati) || isNaN(longi)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             Bins.getBinInLocation(req,res);
         }
@@ -61,7 +61,7 @@ module.exports = function(self){
             page = parseInt(Utils.validateXSS(req.params.page),10);
 
         if(isNaN(lati) || isNaN(longi) || isNaN(page)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             Bins.getBinInLocation(req,res);
         }
@@ -77,7 +77,7 @@ module.exports = function(self){
             limit = parseInt(Utils.validateXSS(req.params.limit),10);
 
         if(isNaN(lati) || isNaN(longi) || isNaN(page) || isNaN(limit)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             Bins.getBinInLocation(req,res);
         }
@@ -94,7 +94,7 @@ module.exports = function(self){
             page = parseInt(Utils.validateXSS(req.params.page),10);
 
         if(isNaN(lati) || isNaN(longi) || isNaN(radius) || isNaN(page)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             Bins.getBinInLocation(req,res);
         }
@@ -113,7 +113,7 @@ module.exports = function(self){
 
 
         if(isNaN(lati) || isNaN(longi) || isNaN(radius) || isNaN(page) || isNaN(limit)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             Bins.getBinInLocation(req,res);
         }
@@ -126,7 +126,7 @@ module.exports = function(self){
         var oid = Utils.validateXSS(req.params.id);
 
         if(!Utils.checkForHexRegExp(oid)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             Bins.getBinDetails(req,res);            
         }
@@ -142,7 +142,7 @@ module.exports = function(self){
         var oid = Utils.validateXSS(req.params.id);
 
         if(!Utils.checkForHexRegExp(oid)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             BinsActivity.getBinLatestActivity(req,res);
         } 
@@ -157,7 +157,7 @@ module.exports = function(self){
             page = parseInt(Utils.validateXSS(req.params.page),10)
 
         if(!Utils.checkForHexRegExp(oid) || isNaN(page)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             BinsActivity.getBinLatestActivity(req,res);
         }    
@@ -173,7 +173,7 @@ module.exports = function(self){
             limit = parseInt(Utils.validateXSS(req.params.limit),10);
 
         if(!Utils.checkForHexRegExp(oid) || isNaN(page) || isNaN(limit)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             BinsActivity.getBinLatestActivity(req,res);
         }  
@@ -186,7 +186,7 @@ module.exports = function(self){
         var oid = Utils.validateXSS(req.params.id);
 
         if(!Utils.checkForHexRegExp(oid) || isNaN(page)){
-            res.status(500).send(Utils.invalidInput());
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             BinsActivity.getBinActivityForRange(req,res);
         }

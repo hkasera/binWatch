@@ -24,5 +24,8 @@ module.exports = {
     },
     checkForHexRegExp: function(id) {
     	return (new RegExp("^[0-9a-fA-F]{24}$")).test(id);
+    },
+    HTTP_STATUS_CODE:{
+    	"BAD_REQUEST" : 400
     }
 }
