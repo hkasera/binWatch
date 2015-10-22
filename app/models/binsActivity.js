@@ -27,7 +27,7 @@ module.exports = {
                     res.send({});
                 }
 
-            });
+        });
     },
     getBinActivityForRange: function(req, res, sanitized_params) {
         if (sanitized_params.page) {
@@ -39,8 +39,8 @@ module.exports = {
         db.binActivity.find({
             "binId": ObjectId(sanitized_params.id),
             "timestamp": {
-                '$gte': new Date(req.body.start).getTime(),
-                '$lte': new Date(req.body.end).getTime()
+                '$gte': new Date(sanitized_params.start).getTime(),
+                '$lte': new Date(sanitized_params.end).getTime()
             }
         }).sort({
             timestamp: -1
@@ -79,5 +79,26 @@ module.exports = {
             }
         });
 
+    },
+    binPredictionCalc:function(sanitized_params){
+      
+      db.binActivity.find({
+            "binId": ObjectId(sanitized_params.id)
+        }).sort({
+            timestamp: -1
+        }).limit(defaultPageSize,
+            function(err, docs) {
+                if (!err) {
+                    
+                } else {
+                    
+                }
+
+        });
     }
+}
+
+function predictTime(bins){
+  var rate = 0,
+      sum_weight = 0;
 }

@@ -105,6 +105,28 @@ module.exports = function(self){
 
     });
 
+    self.app.get('/get/bins/:lati/:longi/:radius' , function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+        
+        /* XSS Validation */
+        var lati = parseFloat(Utils.validateXSS(req.params.lati)),
+            longi = parseFloat(Utils.validateXSS(req.params.longi)),
+            radius = parseInt(Utils.validateXSS(req.params.radius),10);
+
+        var params = {};
+
+        if(isNaN(lati) || isNaN(longi) || isNaN(radius)){
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
+        }else{
+            params.lati = lati;
+            params.longi = longi;
+            params.page = page;
+            params.radius = radius;
+            Bins.getBinInLocation(req,res,params);
+        }
+
+    });
+
     self.app.get('/get/bins/:lati/:longi/:radius/page/:page' , function(req, res) {
         res.setHeader('Content-Type', 'application/json');
         
@@ -239,6 +261,9 @@ module.exports = function(self){
             res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             params.id = oid;
+            params.start = startDate;
+            params.end = endDate;
+            params.attr = attr;
             BinsActivity.getBinActivityForRange(req,res,params);
         }
     });
