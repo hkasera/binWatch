@@ -49,7 +49,10 @@ module.exports = {
                 if (!err) {
                     if (req.body.attr) {
                         res.send(docs.map(function(a) {
-                            return a[req.body.attr];
+                            var rObj = {};
+                            rObj["timestamp"] = a.timestamp;
+                            rObj[sanitized_params.attr] = a[sanitized_params.attr];
+                            return rObj;
                         }));
                     }
                     res.send(docs);
