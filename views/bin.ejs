@@ -10,7 +10,10 @@
     <div class="container">
         <h3><%= bin.name %></h3>
         <div>
-            <p>stores <%= bin.type %> waste</p>
+            <small class="text-muted"><i class="fa fa-clock-o"></i> &nbsp;last updated <%= relativeTime(bin.last_sensed_timestamp) %></small>
+        </div>
+        <div class="tbpadding10">
+            <p>This bin stores <%= bin.type %> waste.</p>
             <p>Temp : <%= bin.temperature %> (in Celsius)</p>
             <p>Humidity : <%= bin.humidity %></p>
         </div>

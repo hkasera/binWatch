@@ -28,7 +28,8 @@
     "express": "~3.4.4",
     "ejs":"~2.3.4",
     "body-parser":"~1.14.1",
-    "xss-filters":"~1.2.6"
+    "xss-filters":"~1.2.6",
+    "moment":"~2.10.6"
   },
   "devDependencies": {},
   "bundleDependencies": [],

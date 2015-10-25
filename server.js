@@ -6,6 +6,7 @@ var path    =  require('path');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
 var Bins = require("./app/models/bins.js");
+var moment = require('moment');
 var Utils = require("./app/common/utils.js");
 /**
  *  Define the BinWatch application.
@@ -203,6 +204,9 @@ var BinWatch = function() {
      */
     self.start = function() {
         //  Start the app on the specific interface (and port).
+        self.app.locals.relativeTime = function(date){
+            return moment(date).fromNow();
+        }
         self.app.engine('html', ejs.renderFile);
         self.app.use(express.static(path.join(__dirname, 'public')));
         

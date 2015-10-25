@@ -12,7 +12,8 @@ var binSchema = {
     "fill": true,
     "name": true,
     "type": true,
-    "address": true
+    "address": true,
+    "last_sensed_timestamp" : true
 };
 var bins = db.collection('bins');
 var defaultPageSize = Utils.getDefaultPageSize();
