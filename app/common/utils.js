@@ -30,7 +30,8 @@ module.exports = {
     	return re.exec(dateString);
     },
     HTTP_STATUS_CODE:{
-    	"BAD_REQUEST" : 400
+    	"BAD_REQUEST" : 400,
+        "SERVER_ERROR" : 500,
     },
     validBinAttrs:["humidity","fill","temperature"]
 }

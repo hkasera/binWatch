@@ -5,6 +5,8 @@ var fs      = require('fs');
 var path    =  require('path');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
+var Bins = require("./app/models/bins.js");
+var Utils = require("./app/common/utils.js");
 /**
  *  Define the BinWatch application.
  */
@@ -136,8 +138,23 @@ var BinWatch = function() {
         };
 
         self.routes['/bin/:id'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            res.render('bin.html');
+            var oid = Utils.validateXSS(req.params.id);
+            var params = {};
+
+            if(!Utils.checkForHexRegExp(oid)){
+                res.redirect("/");
+            }else{
+                params.id = oid;
+                Bins.getBinDetails(params,function(err,docs){
+                    if(!err){
+                        res.setHeader('Content-Type', 'text/html');
+                        res.render('bin.html',{bin:docs});
+                    }else{
+                        res.redirect("/");
+                    }
+                });          
+            }
+            
         };
 
         self.routes['/bins/:from/:to'] = function(req, res) {

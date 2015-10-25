@@ -8,7 +8,13 @@ module.exports = function(self){
     /** Bin API **/
 	self.app.get('/get/bins' , function(req, res) {
         res.setHeader('Content-Type', 'application/json');
-        Bins.getAllBins(req,res,{});
+        Bins.getAllBins({},function(err,docs){
+            if(!err){
+                res.send(docs);
+            }else{
+                res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+            }
+        });
     });
 
     self.app.get('/get/bins/page/:page' , function(req, res) {
@@ -23,7 +29,13 @@ module.exports = function(self){
             res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             params.page = pageNum;
-            Bins.getAllBins(req,res,params);
+            Bins.getAllBins(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }
     });
 
@@ -41,7 +53,13 @@ module.exports = function(self){
         }else{
             params.page = pageNum;
             params.limit = limit;
-            Bins.getAllBins(req,res,params);
+            Bins.getAllBins(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }
         
     });
@@ -59,7 +77,13 @@ module.exports = function(self){
         }else{
             params.lati = lati;
             params.longi = longi;
-            Bins.getBinInLocation(req,res,params);
+            Bins.getBinInLocation(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }
     });
 
@@ -79,7 +103,13 @@ module.exports = function(self){
             params.lati = lati;
             params.longi = longi;
             params.page = page;
-            Bins.getBinInLocation(req,res,params);
+            Bins.getBinInLocation(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }
     });
 
@@ -101,7 +131,13 @@ module.exports = function(self){
             params.longi = longi;
             params.page = page;
             params.limit = limit;
-            Bins.getBinInLocation(req,res,params);
+            Bins.getBinInLocation(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }
 
     });
@@ -122,7 +158,13 @@ module.exports = function(self){
             params.lati = lati;
             params.longi = longi;
             params.radius = radius;
-            Bins.getBinInLocation(req,res,params);
+            Bins.getBinInLocation(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }
 
     });
@@ -145,7 +187,13 @@ module.exports = function(self){
             params.longi = longi;
             params.page = page;
             params.radius = radius;
-            Bins.getBinInLocation(req,res,params);
+            Bins.getBinInLocation(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }
 
     });
@@ -170,7 +218,13 @@ module.exports = function(self){
             params.page = page;
             params.radius = radius;
             params.limit = limit;
-            Bins.getBinInLocation(req,res,params);
+            Bins.getBinInLocation(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }
     });
 
@@ -185,7 +239,13 @@ module.exports = function(self){
             res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             params.id = oid;
-            Bins.getBinDetails(req,res,params);            
+            Bins.getBinDetails(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });          
         }
     });
 
@@ -200,7 +260,13 @@ module.exports = function(self){
             res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             params.id = oid;
-            BinsPrediction.getBinPrediction(req,res,params);            
+            BinsPrediction.getBinPrediction(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });           
         }
     });
 
@@ -218,7 +284,13 @@ module.exports = function(self){
             res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
             params.id = oid;
-            BinsActivity.getBinLatestActivity(req,res,params);
+            BinsActivity.getBinLatestActivity(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         } 
         
     });
@@ -237,7 +309,13 @@ module.exports = function(self){
         }else{
             params.id = oid;
             params.page = page;
-            BinsActivity.getBinLatestActivity(req,res,params);
+            BinsActivity.getBinLatestActivity(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }    
        
     });
@@ -258,7 +336,13 @@ module.exports = function(self){
             params.id = oid;
             params.page = page;
             params.limit = limit;
-            BinsActivity.getBinLatestActivity(req,res,params);
+            BinsActivity.getBinLatestActivity(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }  
     });
 
@@ -279,7 +363,13 @@ module.exports = function(self){
             params.start = startDate;
             params.end = endDate;
             params.attr = attr;
-            BinsActivity.getBinActivityForRange(req,res,params);
+            BinsActivity.getBinActivityForRange(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }
     });
 
@@ -290,7 +380,13 @@ module.exports = function(self){
 
         if(Utils.checkForHexRegExp(oid) && req.body.key && req.body.key === process.env.GMAPP_BROWSER_KEY){
             params.id = oid;
-            BinsActivity.binPredictionCalc(req,res,params);
+            BinsActivity.binPredictionCalc(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
         }else{
             res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }

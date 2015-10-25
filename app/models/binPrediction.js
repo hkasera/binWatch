@@ -6,16 +6,11 @@ var ObjectId = mongojs.ObjectId;
 var binPrediction = db.collection('binPrediction');
 
 module.exports = {
-	getBinPrediction: function(req, res,sanitized_params) {
+	getBinPrediction: function(sanitized_params,callback) {
         db.binPrediction.findOne({
             "binId": ObjectId(sanitized_params.id)
         }, function(err, docs) {
-            if (!err) {
-                res.send(docs);
-            } else {
-                res.send({});
-            }
-
+            callback(err,docs);
         });
     }
 }

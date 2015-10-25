@@ -19,7 +19,7 @@ var defaultPageSize = Utils.getDefaultPageSize();
 var pageNumber = 1;
 
 module.exports = {
-    getAllBins: function(req, res, sanitized_params) {
+    getAllBins: function(sanitized_params, callback) {
         if (sanitized_params && sanitized_params.page) {
             pageNumber = sanitized_params.page;
         }
@@ -29,16 +29,11 @@ module.exports = {
         db.bins.find({}, binSchema).sort({
             timestamp: -1
         }).skip(defaultPageSize * (pageNumber - 1)).limit(defaultPageSize, function(err, docs) {
-            if (!err) {
-                res.send(docs);
-            } else {
-                res.send({});
-            }
-
+            callback(err,docs);
         });
     },
 
-    getBinInLocation: function(req, res,sanitized_params) {
+    getBinInLocation: function(sanitized_params,callback) {
         var lati = sanitized_params.lati,
             longi = sanitized_params.longi,
             maxDistance = 2000;
@@ -71,21 +66,14 @@ module.exports = {
                 }
             }
         }).skip(defaultPageSize * (pageNumber - 1)).limit(defaultPageSize,function(err, docs) {
-            if (err) return console.dir(err)
-
-            res.send(docs);
+            callback(err,docs);
         });
     },
-    getBinDetails: function(req, res,sanitized_params) {
-        db.bins.find({
+    getBinDetails: function(sanitized_params,callback) {
+        db.bins.findOne({
             "_id": ObjectId(sanitized_params.id)
         }, binSchema, function(err, docs) {
-            if (!err) {
-                res.send(docs);
-            } else {
-                res.send({});
-            }
-
+            callback(err,docs);
         });
     }
 }

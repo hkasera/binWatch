@@ -8,7 +8,7 @@ var defaultPageSize = Utils.getDefaultPageSize();
 var pageNumber = 1;
 
 module.exports = {
-    getBinLatestActivity: function(req, res, sanitized_params) {
+    getBinLatestActivity: function(sanitized_params,callback) {
         if (sanitized_params.page) {
             pageNumber = sanitized_params.page;
         }
@@ -21,15 +21,10 @@ module.exports = {
             timestamp: -1
         }).skip(defaultPageSize * (pageNumber - 1)).limit(defaultPageSize,
             function(err, docs) {
-                if (!err) {
-                    res.send(docs);
-                } else {
-                    res.send({});
-                }
-
+                callback(err,docs);
         });
     },
-    getBinActivityForRange: function(req, res, sanitized_params) {
+    getBinActivityForRange: function(sanitized_params,callback) {
         if (sanitized_params.page) {
             pageNumber = sanitized_params.page;
         }
@@ -48,21 +43,22 @@ module.exports = {
             function(err, docs) {
                 if (!err) {
                     if (req.body.attr) {
-                        res.send(docs.map(function(a) {
+                        callback(err,docs.map(function(a) {
                             var rObj = {};
                             rObj["timestamp"] = a.timestamp;
                             rObj[sanitized_params.attr] = a[sanitized_params.attr];
                             return rObj;
                         }));
+                    }else{
+                        callback(err,docs);
                     }
-                    res.send(docs);
                 } else {
-                    res.send({});
+                    callback(err,docs);
                 }
 
             });
     },
-    insertBinActivityForBin: function(req, res, sanitized_params) {
+    insertBinActivityForBin: function(sanitized_params,callback) {
         var randomTemp = Utils.getRandomNumber(40, 80),
             humidity = Utils.getRandomNumber(0, 30),
             fill = Utils.getRandomNumber(0, 100),
@@ -75,11 +71,7 @@ module.exports = {
         binActivityDoc['binId'] = ObjectId(sanitized_params.id);
 
         db.binActivity.insert(binActivityDoc, function(err, docs) {
-            if (!err) {
-                res.send(docs);
-            } else {
-                res.send(err);
-            }
+            callback(err,docs);
         });
 
     },
@@ -93,11 +85,12 @@ module.exports = {
                 if (!err) {
                     if(docs.length != 0){
                         predictTime(docs,sanitized_params.id);
-                        res.send({});
+                        callback(err,docs);
+                    }else{
+                        callback(err,docs);
                     }
                 } else {
-                    console.log(err);
-                    res.send(err);
+                    callback(err,docs);
                 }
 
         });

@@ -25,6 +25,12 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="/js/jquery.js"></script> 
+    <style type="text/css">
+    #map { 
+        height: 30%;
+        min-height: 300px; 
+    }
+    </style>
 
 </head>
 <body>
@@ -61,7 +67,16 @@
         </div>
         <!-- /.container -->
     </nav>
-
+    <div id="map"></div>
+    <div class="container">
+        <h3><%= bin.name %></h3>
+        <div>
+            <p>Fill : <%= bin.fill %> %</p>
+            <p>Type : <%= bin.type %> bin</p>
+            <p>Temp : <%= bin.temperature %> (in Celsius)</p>
+            <p>Humidity : <%= bin.humidity %></p>
+        </div>
+    </div>
 	
 
 
@@ -87,5 +102,28 @@
             </div>
         </div>
     </footer>
+     <script
+      src="https://maps.google.com/maps/api/js?sensor=false&libraries=places">
+    </script>
+    <script type="text/javascript">
+    var map, initialLocation, marker, mapOptions, infowindow;
+    initialLocation = new google.maps.LatLng(<%= bin.latitude %>,<%= bin.longitude %>);
+    mapOptions = {
+        zoom: 16,
+        center: initialLocation
+    }
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    marker = new google.maps.Marker({
+        position: initialLocation,
+        title: "<%= bin.name %>"
+    });
+    infowindow = new google.maps.InfoWindow({
+        content: "<%= bin.name %>"
+      });
+    marker.addListener('click', function() {
+        infowindow.open(map, marker);
+    });
+    marker.setMap(map);
+    </script>
 	</body>
 </html>
