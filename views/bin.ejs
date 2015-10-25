@@ -1,0 +1,63 @@
+<% include partials/header %>
+
+    <style type="text/css">
+    #map { 
+        height: 30%;
+        min-height: 300px; 
+    }
+    </style>
+    <div id="map"></div>
+    <div class="container">
+        <h3><%= bin.name %></h3>
+        <div>
+            <p>stores <%= bin.type %> waste</p>
+            <p>Temp : <%= bin.temperature %> (in Celsius)</p>
+            <p>Humidity : <%= bin.humidity %></p>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+
+                    
+                    <small> <%= bin.fill %> % full</small>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= bin.fill %>" aria-valuemin="0" aria-valuemax="100" style="width:  <%= bin.fill %>%">
+                        <span class="sr-only"><%= bin.fill %>% Complete</span>
+                      </div>
+                    </div>
+                    
+                                
+              
+            </div>
+        </div>
+        
+    </div>
+	
+
+
+	  <% include partials/footer-menu %> 
+
+     <script
+      src="https://maps.google.com/maps/api/js?sensor=false&libraries=places">
+    </script>
+    <script type="text/javascript">
+    var map, initialLocation, marker, mapOptions, infowindow;
+    initialLocation = new google.maps.LatLng(<%= bin.latitude %>,<%= bin.longitude %>);
+    mapOptions = {
+        zoom: 16,
+        center: initialLocation
+    }
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    marker = new google.maps.Marker({
+        position: initialLocation,
+        title: "<%= bin.name %>"
+    });
+    infowindow = new google.maps.InfoWindow({
+        content: "<%= bin.name %>"
+      });
+    marker.addListener('click', function() {
+        infowindow.open(map, marker);
+    });
+    marker.setMap(map);
+    </script>
+	</body>
+</html>

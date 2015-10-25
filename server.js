@@ -46,9 +46,7 @@ var BinWatch = function() {
         }
 
         //  Local cache for static content.
-        self.zcache['index.html'] = fs.readFileSync('./index.html');
-
-        self.zcache['contact.html'] = fs.readFileSync('./contact.html');
+        
 
         self.zcache['trends.html'] = fs.readFileSync('./views/trends.html');
 
@@ -114,17 +112,22 @@ var BinWatch = function() {
 
         self.routes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
+            res.render('index.ejs');
+        };
+
+        self.routes['/faq'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.render('faq.ejs');
         };
 
         self.routes['/locate'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.render('locate.html',{API_KEY: process.env.GMAPP_BROWSER_KEY});
+            res.render('locate.ejs',{API_KEY: process.env.GMAPP_BROWSER_KEY});
         };
 
         self.routes['/contact'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('contact.html') );
+            res.render('contact.ejs');
         };
 
         self.routes['/trends'] = function(req, res) {
@@ -148,7 +151,7 @@ var BinWatch = function() {
                 Bins.getBinDetails(params,function(err,docs){
                     if(!err){
                         res.setHeader('Content-Type', 'text/html');
-                        res.render('bin.html',{bin:docs});
+                        res.render('bin.ejs',{bin:docs});
                     }else{
                         res.redirect("/");
                     }
