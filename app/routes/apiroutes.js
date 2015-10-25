@@ -2,7 +2,7 @@ var Bins = require("../models/bins.js");
 var BinsActivity = require("../models/binsActivity.js");
 var BinsPrediction = require("../models/binPrediction.js");
 var Utils = require("../common/utils.js");
-
+var json2csv = require('json2csv');
 module.exports = function(self){
 
     /** Bin API **/
@@ -346,6 +346,45 @@ module.exports = function(self){
         }  
     });
 
+    self.app.get('/get/bin/:id/activity/:start/:end/:attr/:csv' , function(req, res) {
+        /* XSS Validation */
+        var oid = Utils.validateXSS(req.params.id);
+        var startDate = Utils.validateXSS(req.params.start);
+        var endDate = Utils.validateXSS(req.params.end);
+        var attr = Utils.validateXSS(req.params.attr);
+        var params = {};
+
+        if(!Utils.checkForHexRegExp(oid) || !Utils.isValidDateFormat(startDate) || !Utils.isValidDateFormat(endDate) || (Utils.validBinAttrs.indexOf(attr) == -1)){
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
+        }else{
+            params.id = oid;
+            params.start = startDate;
+            params.end = endDate;
+            params.attr = attr;
+            BinsActivity.getBinActivityForRange(params,function(err,docs){
+                if(!err){
+                    if(req.params.csv){
+                        var fields = ['timestamp', params.attr ];
+                        res.setHeader('Content-disposition', 'attachment; filename=activity.csv');
+                        res.setHeader('Content-Type', 'text/csv');
+                        json2csv({ data: docs, fields: fields }, function(err, csv) {
+                            if (err){
+                                res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                            }else{
+                                res.send(csv);
+                            }
+                        });
+                    }
+                    else{
+                       res.send(docs);
+                    }            
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
+        }
+    });
+
     self.app.post('/get/bin/:id/activity' , function(req, res) {
         res.setHeader('Content-Type', 'application/json');
 
@@ -365,7 +404,7 @@ module.exports = function(self){
             params.attr = attr;
             BinsActivity.getBinActivityForRange(params,function(err,docs){
                 if(!err){
-                    res.send(docs);
+                    res.send(docs);            
                 }else{
                     res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
                 }

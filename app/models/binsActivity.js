@@ -42,7 +42,7 @@ module.exports = {
         }).skip(defaultPageSize * (pageNumber - 1)).limit(defaultPageSize,
             function(err, docs) {
                 if (!err) {
-                    if (req.body.attr) {
+                    if (sanitized_params.attr) {
                         callback(err,docs.map(function(a) {
                             var rObj = {};
                             rObj["timestamp"] = a.timestamp;

@@ -265,3 +265,7 @@ p.copyright {
     position: absolute;
     left: 50%
 }
+button a,button a:hover,button a:visited,button a:focus{
+    text-decoration:none;
+    color: white;
+}
