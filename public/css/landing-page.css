@@ -269,3 +269,6 @@ button a,button a:hover,button a:visited,button a:focus{
     text-decoration:none;
     color: white;
 }
+.hide-it{
+    display: none;
+}
