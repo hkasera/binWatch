@@ -71,7 +71,18 @@ module.exports = {
         binActivityDoc['binId'] = ObjectId(sanitized_params.id);
 
         db.binActivity.insert(binActivityDoc, function(err, docs) {
-            callback(err,docs);
+            if(!err){
+                 db.bins.update({
+                    "_id": ObjectId(sanitized_params.id)
+                    }, {
+                        $set: {
+                            "last_sensed_timestamp": timestamp
+                    }}, function(err, docs) {
+                        callback(err,docs);
+                });
+            }else{
+                callback(err,docs);
+            }          
         });
 
     },

@@ -393,9 +393,23 @@ module.exports = function(self){
 
     });
 
-    /*self.app.post('/add/bin/:id/activity' , function(req, res) {
-        BinsActivity.insertBinActivityForBin(req,res);
-    });*/
+    self.app.post('/add/bin/:id/activity' , function(req, res) {
+        /* XSS Validation */
+        var oid = Utils.validateXSS(req.params.id);
+        var params = {};
+        if(Utils.checkForHexRegExp(oid) && req.body.key && req.body.key === process.env.GMAPP_BROWSER_KEY){
+            params.id = oid;
+            BinsActivity.insertBinActivityForBin(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
+        }else{
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
+        }
+    });
 
  
 }
