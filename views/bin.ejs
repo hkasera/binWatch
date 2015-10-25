@@ -11,17 +11,19 @@
         <h3><%= bin.name %></h3>
         <div>
             <small class="text-muted"><i class="fa fa-clock-o"></i> &nbsp;last updated <%= relativeTime(bin.last_sensed_timestamp) %></small>
+            &nbsp;&nbsp;&nbsp;
+            <small class="text-muted"><i class="fa fa-sun-o"></i> &nbsp;<%= bin.temperature %> &deg; C</small>
+            &nbsp;&nbsp;&nbsp;
+            <small class="text-muted"><i class="fa fa-trash-o"></i> &nbsp;<%= bin.type %> waste</small>
+            &nbsp;&nbsp;&nbsp;
+            <small class="text-muted"><i class="fa fa-drupal"></i> &nbsp;<%= bin.humidity %> %</small>
         </div>
-        <div class="tbpadding10">
-            <p>This bin stores <%= bin.type %> waste.</p>
-            <p>Temp : <%= bin.temperature %> (in Celsius)</p>
-            <p>Humidity : <%= bin.humidity %></p>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+        
+        <div class="row tbpadding10">
+            <div class="col-md-4 prel">
 
                     
-                    <small> <%= bin.fill %> % full</small>
+                    <small class="pabs"> <%= bin.fill %> % full</small>
                     <div class="progress">
                       <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= bin.fill %>" aria-valuemin="0" aria-valuemax="100" style="width:  <%= bin.fill %>%">
                         <span class="sr-only"><%= bin.fill %>% Complete</span>

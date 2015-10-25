@@ -258,3 +258,10 @@ p.copyright {
 .tbpadding10{
     padding:10px 0;
 }
+.prel{
+    position: relative;
+}
+.pabs{
+    position: absolute;
+    left: 50%
+}
