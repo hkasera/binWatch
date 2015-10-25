@@ -86,7 +86,7 @@ module.exports = {
         });
 
     },
-    binPredictionCalc:function(req,res,sanitized_params){      
+    binPredictionCalc:function(sanitized_params,callback){      
       db.binActivity.find({
             "binId": ObjectId(sanitized_params.id),
         }).sort({
