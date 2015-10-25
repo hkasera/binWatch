@@ -33,8 +33,12 @@
          </div>
       </div>
    </div>
+
+   <div id="rec-act">
+      
+   </div>
    <div class="tbpadding10">
-       <button class="btn btn-primary" id="download-report"><a href="/get/bin/<%= bin._id %>/activity/2015-10-25/2015-10-26/humidity/csv"><i class="fa fa-cloud-download"></i>&nbsp;&nbsp;CSV Report</a></button>
+       <button class="btn btn-primary hide" id="download-report"><a href="/get/bin/<%= bin._id %>/activity/2015-10-25/2015-10-26/humidity/csv"><i class="fa fa-cloud-download"></i>&nbsp;&nbsp;CSV Report</a></button>
    </div>
    <div class="tbpadding10">
       <i class="fa fa-comments-o"></i>&nbsp;&nbsp;See any issue, report <a href="mailto:feedback@binwatch.com">here.</a>
@@ -48,6 +52,7 @@
 
  <!-- Bootstrap Core JavaScript -->
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/moment.min.js"></script>
 <script type="text/javascript">
    var map, initialLocation, marker, mapOptions, infowindow;
    initialLocation = new google.maps.LatLng(<%= bin.latitude %>,<%= bin.longitude %>);
@@ -67,7 +72,45 @@
        infowindow.open(map, marker);
    });
    marker.setMap(map);
-   
+   $(document).ready(function(){
+        $.ajax({
+            "url":"/get/bin/<%= bin._id %>/activity",
+            success:function(data){
+                var html = "";
+                if(data.length > 0){
+                    html = '<table class="table">';
+                        html = html  +'<caption>Recent Activity</caption>';
+                        html = html  +'<thead>';
+                        html = html  +'<tr>';
+                        html = html  +'<th>#</th>';
+                        html = html  +'<th>Timestamp</th>';
+                        html = html  +'<th>Temperature(&deg;C)</th>';
+                        html = html  +'<th>Humidity</th>';
+                        html = html  +'<th>Fill(%)</th>';
+                        html = html  +'</tr>';
+                        html = html  +'</thead>';
+                        html = html  +'<tbody>';
+
+                    for(var i = 0; i <data.length ;++i){
+                        html = html  +'<tr>';
+                        html = html  +'<th scope="row">'+(i+1)+'</th>';
+                        html = html  +'<td>'+ moment(data[i].timestamp).fromNow()+'</td>';
+                        html = html  +'<td>'+data[i].temperature+'</td>';
+                        html = html  +'<td>'+data[i].humidity+'</td>';
+                        html = html  +'<td>'+data[i].fill+'</td>';
+                        html = html  +'</tr>';
+                    }
+                    html = html  +'</tbody>';
+                    html = html  +'</tbody>';
+                    $("#download-report").show();
+                }else{
+                    html = "No Recent activity";
+                }
+                
+            $("#rec-act").html(html);
+            }
+        });
+   });
 </script>
 </body>
 </html>
