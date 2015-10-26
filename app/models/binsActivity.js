@@ -21,7 +21,17 @@ module.exports = {
             timestamp: -1
         }).skip(defaultPageSize * (pageNumber - 1)).limit(defaultPageSize,
             function(err, docs) {
-                callback(err,docs);
+                if(sanitized_params.attr){
+                    callback(err,docs.map(function(a) {
+                            var rObj = {};
+                            rObj["timestamp"] = a.timestamp;
+                            rObj[sanitized_params.attr] = a[sanitized_params.attr];
+                            return rObj;
+                    }));
+                }else{
+                    callback(err,docs);
+                }
+                
         });
     },
     getBinActivityForRange: function(sanitized_params,callback) {

@@ -1,0 +1,28 @@
+<% include partials/header %>
+<style type="text/css">
+	.ct-chart{
+		max-height: 400px;
+	}
+</style>
+<header class="sb-page-header">
+        
+</header>
+<div class="container">
+    <div class="row">
+		<div class="ct-chart ct-perfect-fourth"></div>
+	</div>
+</div>
+
+<script>
+new Chartist.Line('.ct-chart', {
+  labels: [10, 20, 30, 40, 50, 60, 70, 80],
+  series: [
+    [50, 90, 70, 80, 50, 30, 50, 40]
+  ]
+}, {
+  low: 0,
+  showArea: true
+});
+</script>
+
+<% include partials/footer %> 

@@ -6,6 +6,7 @@ var path    =  require('path');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
 var Bins = require("./app/models/bins.js");
+var BinActivity = require("./app/models/binsActivity.js");
 var moment = require('moment');
 var Utils = require("./app/common/utils.js");
 /**
@@ -136,6 +137,11 @@ var BinWatch = function() {
             res.send(self.cache_get('trends.html') );
         };
 
+        self.routes['/dashboard'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.render('dashboard.ejs');
+        };
+
         self.routes['/bins'] = function(req, res) {
             res.setHeader('Content-Type', 'application/json');
             res.send(self.cache_get('dump.json') );
@@ -153,6 +159,26 @@ var BinWatch = function() {
                     if(!err){
                         res.setHeader('Content-Type', 'text/html');
                         res.render('bin.ejs',{bin:docs});
+                    }else{
+                        res.redirect("/");
+                    }
+                });          
+            }
+            
+        };
+
+        self.routes['/bin/:id/activity'] = function(req, res) {
+            var oid = Utils.validateXSS(req.params.id);
+            var params = {};
+
+            if(!Utils.checkForHexRegExp(oid)){
+                res.redirect("/");
+            }else{
+                params.id = oid;
+                BinActivity.getBinLatestActivity(params,function(err,docs){
+                    if(!err){
+                        res.setHeader('Content-Type', 'text/html');
+                        res.render('bin-activity.ejs',{activity:docs,id:oid});
                     }else{
                         res.redirect("/");
                     }

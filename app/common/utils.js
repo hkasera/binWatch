@@ -33,5 +33,5 @@ module.exports = {
     	"BAD_REQUEST" : 400,
         "SERVER_ERROR" : 500,
     },
-    validBinAttrs:["humidity","fill","temperature"]
+    validBinAttrs:["humidity","fill","temperature","timestamp"]
 }

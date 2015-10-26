@@ -101,7 +101,8 @@
                         html = html  +'</tr>';
                     }
                     html = html  +'</tbody>';
-                    html = html  +'</tbody>';
+                    html = html  +'</table>';
+                    html =  html + '<div class="tbpadding10">View activity graph <a href="/bin/<%= bin._id %>/activity">here</a></div>'
                     $("#download-report").show();
                 }else{
                     html = "No Recent activity";

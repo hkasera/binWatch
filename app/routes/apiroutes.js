@@ -384,7 +384,7 @@ module.exports = function(self){
             });
         }
     });
-
+    
     self.app.post('/get/bin/:id/activity' , function(req, res) {
         res.setHeader('Content-Type', 'application/json');
 
@@ -403,6 +403,64 @@ module.exports = function(self){
             params.end = endDate;
             params.attr = attr;
             BinsActivity.getBinActivityForRange(params,function(err,docs){
+                if(!err){
+                    res.send(docs);            
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
+        }
+    });
+
+    self.app.get('/get/bin/:id/activity/:csv' , function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+
+        /* XSS Validation */
+        var oid = Utils.validateXSS(req.params.id);
+        var params = {};
+
+        if(!Utils.checkForHexRegExp(oid)){
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
+        }else{
+            params.id = oid;
+            BinsActivity.getBinLatestActivity(params,function(err,docs){
+                if(!err){
+                    if(req.params.csv){
+                        var fields = Utils.validBinAttrs;
+                        res.setHeader('Content-disposition', 'attachment; filename=activity.csv');
+                        res.setHeader('Content-Type', 'text/csv');
+                        json2csv({ data: docs, fields: fields }, function(err, csv) {
+                            if (err){
+                                res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                            }else{
+                                res.send(csv);
+                            }
+                        });
+                    }
+                    else{
+                        res.send(docs);
+                    }            
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
+        }
+    });
+
+    self.app.get('/get/bin/:id/activity/:attr' , function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+
+        /* XSS Validation */
+        var oid = Utils.validateXSS(req.params.id);       
+        var attr = Utils.validateXSS(req.params.attr);
+        var params = {};
+
+        if(!Utils.checkForHexRegExp(oid) || (Utils.validBinAttrs.indexOf(attr) == -1)){
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
+        }else{
+            params.id = oid;
+            params.attr = attr;
+            BinsActivity.getBinLatestActivity(params,function(err,docs){
                 if(!err){
                     res.send(docs);            
                 }else{
