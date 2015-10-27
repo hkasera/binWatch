@@ -5,7 +5,7 @@ module.exports = {
     },
     getRandomFloat: function(low, high) {
         return Math.round((Math.random() * (high - low) + low)*100)/100;
-    }
+    },
     getTimestamp: function() {
         if (!Date.now) {
             return new Date().getTime();
