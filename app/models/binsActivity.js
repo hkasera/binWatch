@@ -76,7 +76,7 @@ module.exports = {
             binActivityDoc = {};
         binActivityDoc['temperature'] = randomTemp;
         binActivityDoc['humidity'] = humidity;
-        binActivityDoc['fill'] = parseInt(fill, 10);
+        binActivityDoc['fill'] = fill;
         binActivityDoc['timestamp'] = timestamp;
         binActivityDoc['binId'] = ObjectId(sanitized_params.id);
 

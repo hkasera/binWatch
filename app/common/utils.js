@@ -1,7 +1,7 @@
 var xssFilters = require('xss-filters');
 module.exports = {
     getRandomNumber: function(low, high) {
-        return Math.random() * (high - low) + low;
+        return parseInt(Math.random() * (high - low) + low,10);
     },
     getRandomFloat: function(low, high) {
         return Math.round((Math.random() * (high - low) + low)*100)/100;
