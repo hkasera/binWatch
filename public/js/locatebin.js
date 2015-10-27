@@ -130,7 +130,7 @@ function locateBins(bins){
         if(bins[i].fill > 70){
             icon = "/img/filledbin.png";
         }else if(bins[i].fill < 70 && bins[i].fill > 50){
-          icon = "/img/half_filled_bin.png";
+          icon = "/img/half_fill_bin.png";
         }else{
           icon = "/img/empty_bin.png";
         }
