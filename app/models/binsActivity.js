@@ -69,13 +69,13 @@ module.exports = {
             });
     },
     insertBinActivityForBin: function(sanitized_params,callback) {
-        var randomTemp = Utils.getRandomNumber(40, 80),
-            humidity = Utils.getRandomNumber(10, 90),
+        var randomTemp = Utils.getRandomFloat(40, 80),
+            humidity = Utils.getRandomFloat(10, 90),
             fill = Utils.getRandomNumber(0, 100),
             timestamp = Utils.getTimestamp(),
             binActivityDoc = {};
-        binActivityDoc['temperature'] = parseFloat(randomTemp).toFixed(2);
-        binActivityDoc['humidity'] = parseFloat(humidity).toFixed(2);;
+        binActivityDoc['temperature'] = randomTemp;
+        binActivityDoc['humidity'] = humidity;
         binActivityDoc['fill'] = parseInt(fill, 10);
         binActivityDoc['timestamp'] = timestamp;
         binActivityDoc['binId'] = ObjectId(sanitized_params.id);

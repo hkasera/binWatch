@@ -3,6 +3,9 @@ module.exports = {
     getRandomNumber: function(low, high) {
         return Math.random() * (high - low) + low;
     },
+    getRandomFloat: function(low, high) {
+        return Math.round((Math.random() * (high - low) + low)*100)/100;
+    }
     getTimestamp: function() {
         if (!Date.now) {
             return new Date().getTime();
