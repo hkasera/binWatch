@@ -70,7 +70,7 @@ module.exports = {
     },
     insertBinActivityForBin: function(sanitized_params,callback) {
         var randomTemp = Utils.getRandomNumber(40, 80),
-            humidity = Utils.getRandomNumber(0, 30),
+            humidity = Utils.getRandomNumber(10, 90),
             fill = Utils.getRandomNumber(0, 100),
             timestamp = Utils.getTimestamp(),
             binActivityDoc = {};
@@ -86,7 +86,10 @@ module.exports = {
                     "_id": ObjectId(sanitized_params.id)
                     }, {
                         $set: {
-                            "last_sensed_timestamp": timestamp
+                            "last_sensed_timestamp": timestamp,
+                            "humidity":humidity,
+                            "fill":fill,
+                            "temperature":randomTemp
                     }}, function(err, docs) {
                         callback(err,docs);
                 });
