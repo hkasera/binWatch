@@ -4,7 +4,9 @@ var map,
     binsPlaced = [],
     browserSupportFlag = false,
     initialLocation,
-    defaultLocation = new google.maps.LatLng(12.9264849, 77.6050077);
+    myLat = 12.9264849,
+    myLong = 77.6050077,
+    defaultLocation = new google.maps.LatLng(myLat, myLong);
 
 function init(){
   map = new google.maps.Map(document.getElementById('map'), {
@@ -17,6 +19,8 @@ function init(){
   if(navigator.geolocation) {
     browserSupportFlag = true;
     navigator.geolocation.getCurrentPosition(function(position) {
+      myLat = position.coords.latitude;
+      myLong = position.coords.longitude;
       initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
       map.setCenter(initialLocation);
       var url = "/get/bins/" + parseFloat(position.coords.latitude,10) + "/" + parseFloat(position.coords.longitude,10);
@@ -114,12 +118,26 @@ function locateBins(bins){
     
     
     infowindow = new google.maps.InfoWindow();
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(myLat, myLong),
+      map: map,
+    });
+
+    
+
     for (i = 0; i < bins.length; i++) {
-       
+          var icon = "/img/trash.png";
+        if(bins[i].fill > 70){
+            icon = "/img/filledbin.png";
+        }else if(bins[i].fill < 70 && bins[i].fill > 50){
+          icon = "/img/half_filled_bin.png";
+        }else{
+          icon = "/img/empty_bin.png";
+        }
         marker = new google.maps.Marker({
           position: new google.maps.LatLng(bins[i].latitude, bins[i].longitude),
           map: map,
-          icon: '/img/trash.png'
+          icon: icon
       });
       
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -147,11 +165,11 @@ function getDirections(){
       mapTypeId: google.maps.MapTypeId.ROADMAP,
   }
   directionsDisplay.setMap(map);
-    var start = getPosition(bins[0].latitude,bins[0].longitude);
+    var start = getPosition(myLat,myLong);
     
     var end =  getPosition(bins[bins.length-1].latitude,bins[bins.length-1].longitude);
     var waypts = [];
-    for(i=1;i<=bins.length-2;++i){
+    for(i=0;i<=bins.length-2;++i){
       var pts = {
         location: getPosition(bins[i].latitude,bins[i].longitude),
         stopover: true
