@@ -3,6 +3,7 @@ var BinsActivity = require("../models/binsActivity.js");
 var BinsPrediction = require("../models/binPrediction.js");
 var Utils = require("../common/utils.js");
 var json2csv = require('json2csv');
+var moment = require('moment');
 module.exports = function(self){
 
     /** Bin API **/
@@ -357,6 +358,14 @@ module.exports = function(self){
         if(!Utils.checkForHexRegExp(oid) || !Utils.isValidDateFormat(startDate) || !Utils.isValidDateFormat(endDate) || (Utils.validBinAttrs.indexOf(attr) == -1)){
             res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
         }else{
+
+            var month_diff = moment(endDate).diff(moment(startDate),'month');
+            if(month_diff > 6){
+                res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidDateRange());
+                return;
+            }
+
+
             params.id = oid;
             params.start = startDate;
             params.end = endDate;

@@ -1,10 +1,9 @@
 var db = require("../../db.js");
 var mongojs = require('mongojs');
 var Utils = require("../common/utils.js");
-
 var ObjectId = mongojs.ObjectId;
 var binActivity = db.collection('binActivity');
-var defaultPageSize = Utils.getDefaultPageSize();
+var defaultPageSize = Utils.getDefaultActivityPageSize();
 var pageNumber = 1;
 
 module.exports = {
@@ -41,6 +40,8 @@ module.exports = {
         if (sanitized_params.limit) {
             defaultPageSize = (defaultPageSize > sanitized_params.limit) ? parseInt(sanitized_params.limit, 10) : defaultPageSize;
         }
+
+        
         db.binActivity.find({
             "binId": ObjectId(sanitized_params.id),
             "timestamp": {

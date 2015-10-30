@@ -16,6 +16,9 @@ module.exports = {
     getDefaultPageSize: function() {
         return 15;
     },
+    getDefaultActivityPageSize: function() {
+        return 100;
+    },
     validateXSS: function(param) {
         return xssFilters.inHTMLData(param);
     },
@@ -23,6 +26,12 @@ module.exports = {
         return {
             "errorCode": 102,
             "errorText": "Invalid Input"
+        };
+    },
+    invalidDateRange: function() {
+        return {
+            "errorCode": 103,
+            "errorText": "Date range too long or invalid"
         };
     },
     checkForHexRegExp: function(id) {
