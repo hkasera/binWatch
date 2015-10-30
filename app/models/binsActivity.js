@@ -45,7 +45,7 @@ module.exports = {
                     }
                 }
             },
-            { $group : { _id : "$binId", activity: { $push: "$$ROOT" } } },
+            { $group : { _id : "binId", activity: { $push: "$$ROOT" } } },
             function(err, docs) {
                 callback(err,docs);
             }
