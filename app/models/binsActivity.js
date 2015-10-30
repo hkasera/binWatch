@@ -33,6 +33,25 @@ module.exports = {
                 
         });
     },
+    getMultipleBinActivity:function(sanitized_params,callback){
+        var oids = sanitized_params.ids.map(function(a){
+            return ObjectId(a);
+        });
+        db.binActivity.aggregate(
+            {"$match":
+                {   
+                    "binId": { 
+                        $in: oids
+                    }
+                }
+            },
+            { $group : { _id : "$binId", activity: { $push: "$$ROOT" } } },
+            function(err, docs) {
+                callback(err,docs);
+            }
+
+        );
+    },
     getBinActivityForRange: function(sanitized_params,callback) {
         if (sanitized_params.page) {
             pageNumber = sanitized_params.page;

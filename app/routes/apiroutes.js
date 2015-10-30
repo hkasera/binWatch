@@ -296,6 +296,32 @@ module.exports = function(self){
         
     });
 
+    self.app.get('/get/bin/ids/:ids/activity' , function(req, res) {
+        res.setHeader('Content-Type', 'application/json');
+
+        /* XSS Validation */
+        var oids = Utils.validateXSS(req.params.ids);
+        var oids = oids.split(',');
+        var params = {};
+
+        if(!oids.every(Utils.checkForHexRegExp)){
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
+        }else{
+            params.ids = oids;
+            BinsActivity.getMultipleBinActivity(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
+        } 
+        
+    });
+
+
+
+
     self.app.get('/get/bin/:id/activity/page/:page' , function(req, res) {
         res.setHeader('Content-Type', 'application/json');
 
