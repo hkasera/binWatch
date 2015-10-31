@@ -271,7 +271,7 @@ module.exports = function(self){
         }
     });
 
-    self.app.post('/bin/add/:lati/:longi' , function(req, res) {
+    self.app.post('/add/bin/:lati/:longi' , function(req, res) {
 
          /* XSS Validation */
         var lati = parseFloat(Utils.validateXSS(req.params.lati),10),
