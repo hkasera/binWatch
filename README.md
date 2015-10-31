@@ -39,11 +39,18 @@ Video : https://drive.google.com/folderview?id=0ByqHXKZtJenqdWk4MFVDVnRmdTg&usp=
   
   * **json2csv** 
   
-        
 
-## API Documentation
+## API Documentation and Other Details
 
-https://github.com/hkasera/binWatch/wiki/API-reference
+Link for API reference : https://github.com/hkasera/binWatch/wiki/API-reference
+
+Wiki Link : https://github.com/hkasera/binWatch/wiki
+
+## Repositories
+
+iOS Repo : https://github.com/negialpana/BinWatch
+
+Predictions Repo : https://github.com/madhumita25/BinWatch
 
 ## Deployments
 
