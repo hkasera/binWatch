@@ -2,6 +2,10 @@
 
 URL : http://binwatch-ghci.rhcloud.com/
 
+## Presentation
+
+URL : http://binwatch-ghci.rhcloud.com/docs/Pitch.pdf
+
 ## Installation
 
 * Install node js
@@ -57,6 +61,7 @@ Once the merge is executed we're ready to push your git repo to openshift. We do
      git push openshift HEAD
 
 We tell git to push our local code to the HEAD branch on the remote repo called "openshift" (the alias we stored the openshift git repo).
+
 
 ## References 
 
