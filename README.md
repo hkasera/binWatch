@@ -26,7 +26,7 @@ URL : http://binwatch-ghci.rhcloud.com/
   
   * **moment** 
   
-  * **json2csvs** 
+  * **json2csv** 
   
         
 
