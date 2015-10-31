@@ -46,6 +46,8 @@ Link for API reference : https://github.com/hkasera/binWatch/wiki/API-reference
 
 Wiki Link : https://github.com/hkasera/binWatch/wiki
 
+Simulation of Data :  https://github.com/hkasera/binWatch/wiki#simulation
+
 ## Repositories
 
 iOS Repo : https://github.com/negialpana/BinWatch
