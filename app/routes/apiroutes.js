@@ -271,6 +271,29 @@ module.exports = function(self){
         }
     });
 
+    self.app.post('/bin/add/:lati/:longi' , function(req, res) {
+
+         /* XSS Validation */
+        var lati = parseFloat(Utils.validateXSS(req.params.lati),10),
+            longi = parseFloat(Utils.validateXSS(req.params.longi),10);
+        var params = {};
+
+        if(req.body.key && req.body.key === process.env.GMAPP_BROWSER_KEY){
+            params.lati = lati;
+            params.longi = longi;
+            Bins.createBin(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+            });
+        }else{
+            res.status(Utils.HTTP_STATUS_CODE.BAD_REQUEST).send(Utils.invalidInput());
+        }
+
+    });
+
 
     /** Bin activity API **/
 

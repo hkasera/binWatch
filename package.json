@@ -30,7 +30,8 @@
     "body-parser":"~1.14.1",
     "xss-filters":"~1.2.6",
     "moment":"~2.10.6",
-    "json2csv":"~3.0.0"
+    "json2csv":"~3.0.0",
+    "geocoder":"~0.2.2"
   },
   "devDependencies": {},
   "bundleDependencies": [],

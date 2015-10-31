@@ -14,7 +14,9 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 
 var db = mongojs(connection_string, ['bins','binActivity','binPrediction']);
 
+db.bins.createIndex( { loc: 1 }, { unique: true } );
 db.bins.ensureIndex({loc: "2dsphere"});
+
 
 module.exports = db;
 
