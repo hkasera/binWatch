@@ -9,10 +9,15 @@ URL : http://binwatch-ghci.rhcloud.com/
 
 ## Run the server locally
 
+         sudo mongod
+   This will run mongo server.
+         
          npm install
+   This will install all the packages required
 
          node server.js
-         
+   This will run the server on localhost, port no 8080
+   
          
 ## NPM Packages
        
