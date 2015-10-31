@@ -4,7 +4,7 @@ URL : http://binwatch-ghci.rhcloud.com/
 
 ## Presentation
 
-PPT   :   http://binwatch-ghci.rhcloud.com/docs/Pitch.pdf
+PPT   : http://binwatch-ghci.rhcloud.com/docs/Pitch.pdf
 
 Video : https://drive.google.com/folderview?id=0ByqHXKZtJenqdWk4MFVDVnRmdTg&usp=sharing
 
