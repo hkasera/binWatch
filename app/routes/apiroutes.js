@@ -548,7 +548,7 @@ module.exports = function(self){
 
     });
 
-    self.app.post('/add/bin/:id/activity' , function(req, res) {
+    self.app.post('/add/bin/:id/activity/data' , function(req, res) {
         /* XSS Validation */
         var oid = Utils.validateXSS(req.params.id);
         var params = {};
