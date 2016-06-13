@@ -293,6 +293,25 @@ module.exports = function(self){
         }
 
     });
+    
+    self.app.get('/add/bin/:lati/:longi' , function(req, res) {
+
+         /* XSS Validation */
+        var lati = parseFloat(Utils.validateXSS(req.params.lati),10),
+            longi = parseFloat(Utils.validateXSS(req.params.longi),10);
+        var params = {};
+
+        params.lati = lati;
+        params.longi = longi;
+        Bins.createBin(params,function(err,docs){
+                if(!err){
+                    res.send(docs);
+                }else{
+                    res.status(Utils.HTTP_STATUS_CODE.SERVER_ERROR).send(err);
+                }
+        });
+
+    });
 
 
     /** Bin activity API **/
