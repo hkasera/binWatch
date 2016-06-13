@@ -141,6 +141,11 @@ var BinWatch = function() {
             res.setHeader('Content-Type', 'text/html');
             res.render('dashboard.ejs');
         };
+		
+		self.routes['/admin/addbin'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.render('admin/addbin.ejs');
+        };
 
         self.routes['/bins'] = function(req, res) {
             res.setHeader('Content-Type', 'application/json');
